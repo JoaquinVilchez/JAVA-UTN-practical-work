@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import model.Product;
 
-public class ProductDAO {
+public class ProductDao {
 	
 	public static boolean store(Product product) {
 		try {
@@ -53,6 +53,59 @@ public class ProductDAO {
 			return list;
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	
+	public static boolean update(Product product) {
+		
+		try {
+			String SQL = "UPDATE products SET ("
+					+ "name=?,"
+					+ "description=?,"
+					+ "price=?,"
+					+ "available=?,"
+					+ "picture=?,"
+					+ "category=?,"
+					+ "WHERE id=?)";
+			
+			Connection con = DBConnection.connect();
+			PreparedStatement st = con.prepareStatement(SQL);
+			st.setString(1, product.getName());
+			st.setString(2, product.getDescription());
+			st.setFloat(3, product.getPrice());
+			st.setBoolean(4, product.getAvailable());
+			st.setString(5, product.getPicture());
+			st.setInt(5, product.getCategory());
+			st.setInt(7, product.getId());
+			
+			if(st.executeUpdate()>0) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	public static boolean destroy(Product product) {
+		try {
+			String SQL = "DELETE FROM products WHERE id=?;";
+			Connection con = DBConnection.connect();
+			PreparedStatement st = con.prepareStatement(SQL);
+			st.setInt(1, product.getId());
+			
+			if(st.executeUpdate()>0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }
