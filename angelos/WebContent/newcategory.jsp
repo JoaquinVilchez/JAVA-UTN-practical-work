@@ -31,20 +31,20 @@
             <div class="card card-primary">
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form action="categoryController" method="POST">
                   <div class="card-body">
                       <div class="form-group">
                             <div class="row">
                               <div class="col-4">
-                                  <label for="exampleInputEmail1">Nombre</label>
-                                  <input type="name" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la categoría">
+                                  <label >Nombre</label>
+                                  <input type="text" name="name" class="form-control" placeholder="Nombre de la categoría">
                               </div>
                           </div>
                       </div>
                     <div class="form-group">
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-                        <label class="form-check-label" for="exampleCheck1">Esta categoría está disponible</label>
+                        <input type="checkbox" class="form-check-input" name="available" checked>
+                        <label class="form-check-label">Esta categoría está disponible</label>
                       </div>
                     </div>
                     

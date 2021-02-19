@@ -11,9 +11,17 @@ public class ProductDao {
 	
 	public static boolean store(Product product) {
 		try {
-			String SQL = "INSERT INTO products values (?,?,?,?,?,?)";
+			String SQL = "INSERT INTO products values (null,?,?,?,?,?,?)";
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
+			
+			System.out.println(product.getName());
+			System.out.println(product.getDescription());
+			System.out.println(product.getPrice());
+			System.out.println(product.getAvailable());
+			System.out.println(product.getPicture());
+			System.out.println(product.getCategory());
+			
 			st.setString(1, product.getName());
 			st.setString(2, product.getDescription());
 			st.setFloat(3, product.getPrice());
@@ -57,7 +65,6 @@ public class ProductDao {
 	}
 	
 	public static boolean update(Product product) {
-		
 		try {
 			String SQL = "UPDATE products SET ("
 					+ "name=?,"
@@ -87,7 +94,6 @@ public class ProductDao {
 			e.printStackTrace();
 			return false;
 		}
-		
 	}
 	
 	public static boolean destroy(Product product) {
@@ -106,6 +112,34 @@ public class ProductDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static Product find(int id) {
+		try {
+			String SQL = "SELECT * FROM products WHERE id=?";
+			Connection con = DBConnection.connect();
+			PreparedStatement st = con.prepareStatement(SQL);
+			st.setInt(1, id);
+			ResultSet result = st.executeQuery();
+			if(result.next()) {
+				Product product = new Product(); 
+				product.setId(result.getInt("id"));
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				product.setAvailable(result.getBoolean("available"));
+				product.setPicture(result.getString("picture"));
+				product.setCategory(result.getInt("category"));
+				
+				return product;
+			}else {
+				return null;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

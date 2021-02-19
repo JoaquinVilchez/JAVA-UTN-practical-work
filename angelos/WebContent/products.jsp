@@ -1,4 +1,8 @@
 <%@ include file="header.jsp" %>
+<%@page import="model.Product"%>
+<%@page import="dao.ProductDao"%>
+<%@page import="dao.CategoryDao"%>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -35,7 +39,8 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+              <div class="table-hover">
+                <table id="example1" class="table table-bordered">
                   <thead>
                   <tr>
                     <th>Nombre</th>
@@ -46,136 +51,24 @@
                   </tr>
                   </thead>
                   <tbody>
+                  <% for(Product p:ProductDao.getAll()){ %>
                   <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
+                    <td><%= p.getName() %></td>
+                    <td>
+	                    <% if(p.getDescription()==""){ %>
+	                    	<span>-</span>
+	                    <%}else{ %>
+	                    	<%= p.getDescription() %>
+	                    <%} %>
+                    </td>
+                    <td><%= CategoryDao.find(p.getCategory()).getName() %></td>
+                    <td>$<%= p.getPrice() %></td>
                     <td>
                       <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
                       <a href="#"><i class="fas fa-trash"></i></a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Napolitana</td>
-                    <td>Queso, tomate, albhaca</td>
-                    <td>Pizzas</td>
-                    <td>$500</td>
-                    <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
+                  <% } %>
                   </tbody>
                   <tfoot>
                   <tr>
@@ -187,6 +80,7 @@
                   </tr>
                   </tfoot>
                 </table>
+               </div>
               </div>
               <!-- /.card-body -->
             </div>

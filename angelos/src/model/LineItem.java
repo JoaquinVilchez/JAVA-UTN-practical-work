@@ -1,6 +1,8 @@
 package model;
 
-public class LineItem {
+import java.io.Serializable;
+
+public class LineItem implements Serializable{
 
 	private int id, order, product, quantity;
 	private float price;

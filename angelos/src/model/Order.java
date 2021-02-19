@@ -1,6 +1,8 @@
 package model;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable{
 
 	private int id, user, address;
 	private String code, ordered, accepted, closed, shipped, shipping_method, aditional_notes;

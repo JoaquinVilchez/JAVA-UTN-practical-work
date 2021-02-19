@@ -1,4 +1,6 @@
 <%@ include file="header.jsp" %>
+<%@page import="dao.CategoryDao"%>
+<%@page import="model.Category"%>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -33,29 +35,29 @@
             <div class="card card-primary">
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form action="productController" method="POST"  enctype="multipart/form-data"> 
                   <div class="card-body">
                       <div class="form-group">
                               <div class="row">
                               <div class="col-4">
-                                  <label for="exampleInputEmail1">Nombre</label>
-                                  <input type="name" class="form-control" id="exampleInputEmail1" placeholder="Nombre del producto">
+                                  <label>Nombre</label>
+                                  <input type="text" name="name" class="form-control" placeholder="Nombre del producto">
                               </div>
                               <div class="col-4">
-                                  <label for="exampleSelectBorder">Categoría</label>
-                                  <select class="custom-select form-control" id="exampleSelectBorder">
-                                      <option>Value 1</option>
-                                      <option>Value 2</option>
-                                      <option>Value 3</option>
+                                  <label>Categoría</label>
+                                  <select class="custom-select form-control" name="category">
+                                  <% for(Category c:CategoryDao.getAll()) {%>
+                                      <option value="<%= c.getId() %>"><%= c.getName() %> <% if(c.getState()==false){ %>(No disponible)<%} %></option>
+                                  <% } %>
                                   </select>
                               </div>
                               <div class="col-4">
-                                <label for="exampleInputEmail1">Precio</label>
+                                <label>Precio</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="price">
                                 </div>
                             </div>
                           </div>
@@ -63,22 +65,22 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-6">
-                                <label for="exampleInputEmail1">Descripción</label>
+                                <label>Descripción</label>
                                 <textarea name="description" class="form-control" cols="30" rows="3" placeholder="Descripción del producto"></textarea>
                             </div>
                             <div class="col-6">
-                                <div class="form-group">
-                                <label for="exampleInputFile">Imágen</label>
+                                <div class="form-group">	
+                                <label>Imágen</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Elegir archivo</label>
+                                    <input type="file" class="custom-file-input" name="picture">
+                                    <label class="custom-file-label">Elegir archivo</label>
                                     </div>
                                 </div>
                                 </div>
                                 <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-                                <label class="form-check-label" for="exampleCheck1">Este producto está disponible</label>
+                                <input type="checkbox" class="form-check-input" name="state" checked>
+                                <label class="form-check-label">Este producto está disponible</label>
                                 </div>
                             </div>
                         </div>
