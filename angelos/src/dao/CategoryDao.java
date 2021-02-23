@@ -77,11 +77,9 @@ public class CategoryDao {
 	}
 	
 	public static boolean update(Category category) {
-		try {			
-			String SQL = "UPDATE categories SET ("
-					+ "name=?,"
-					+ "state=?"
-					+ "WHERE id=?";
+		try {
+			
+			String SQL = "UPDATE categories SET name=?, state=? WHERE id=?";
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
 			st.setString(1, category.getName());
@@ -98,12 +96,12 @@ public class CategoryDao {
 		}
 	}
 	
-	public static boolean destroy(Category category) {
+	public static boolean destroy(int id) {
 		try {
 			String SQL = "DELETE from categories WHERE id=?";
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
-			st.setInt(1, category.getId());
+			st.setInt(1, id);
 			if(st.executeUpdate()>0) {
 				return true;
 			}else {
@@ -137,6 +135,29 @@ public class CategoryDao {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static boolean haveProducts(int id) {
+		try {
+			String SQL = "SELECT COUNT(*) FROM products WHERE category=?";
+			Connection con = DBConnection.connect();
+			PreparedStatement st = con.prepareStatement(SQL);
+			st.setInt(1, id);
+			ResultSet result = st.executeQuery();
+			result.next();
+			int productsCount = result.getInt("count(*)");
+			
+			if(productsCount>0) {
+				return true;				
+			}else{
+				return false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return true;
+		}
+		
 	}
 		
 	

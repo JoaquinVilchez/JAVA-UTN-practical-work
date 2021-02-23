@@ -1,4 +1,6 @@
 <%@ include file="header.jsp" %>
+<%@page import="model.Category"%>
+<%@page import="dao.CategoryDao"%>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -15,7 +17,7 @@
             <h1 class="m-0">Categorías</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <a href="newcategory.jsp" type="button" class="btn btn-primary float-right">Nuevo</a>
+            <a href="categoryController?action=create" type="button" class="btn btn-primary float-right">Nuevo</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -45,51 +47,17 @@
                   </tr>
                   </thead>
                   <tbody>
+                  <% for(Category c:CategoryDao.getAll()){ %>
                   <tr>
-                    <td>Pizzas</td>
-                    <td>10 productos</td>
-                    <td>Disponible</td>
+                    <td><%= c.getName() %></td>
+                    <td></td>
+                    <td><% if(c.getState()==true){ %> Disponible <%}else{ %> No disponible <%} %></td>
                     <td>
-                      <a href="editcategory.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
+                      <a href="categoryController?action=edit&id=<%= c.getId()%>"><i class="fas fa-edit"></i></a>
+                      <a href="categoryController?action=destroy&id=<%= c.getId()%>"><i class="fas fa-trash"></i></a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Empanadas</td>
-                    <td>10 productos</td>
-                    <td>Disponible</td>
-                    <td>
-                      <a href="editcategory.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Hamburguesas</td>
-                    <td>10 productos</td>
-                    <td>Disponible</td>
-                    <td>
-                      <a href="editcategory.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Sandwiches</td>
-                    <td>10 productos</td>
-                    <td>Disponible</td>
-                    <td>
-                      <a href="editcategory.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bebidas</td>
-                    <td>10 productos</td>
-                    <td>Disponible</td>
-                    <td>
-                      <a href="editcategory.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
+                  <%} %>
                   </tbody>
                   <tfoot>
                   <tr>

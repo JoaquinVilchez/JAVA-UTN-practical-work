@@ -42,14 +42,15 @@ public class ProductDao {
 	
 	public static ArrayList<Product> getAll(){
 		try {
-			String SQL = "SELECT * FROM products";
+			String SQL = "SELECT * FROM products ORDER BY category ASC";
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
 			ResultSet result = st.executeQuery();
 			ArrayList<Product> list = new ArrayList<>();
 			Product product;
 			while (result.next()) {
-				product = new Product();
+				product = new Product();	
+				product.setId(result.getInt("id"));
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
@@ -66,14 +67,26 @@ public class ProductDao {
 	
 	public static boolean update(Product product) {
 		try {
-			String SQL = "UPDATE products SET ("
+			
+			System.out.println("DAO:");
+
+			System.out.println(product.getId());
+			System.out.println(product.getName());
+			System.out.println(product.getCategory());
+			System.out.println(product.getPrice());
+			System.out.println(product.getDescription());
+			System.out.println(product.getAvailable());
+			System.out.println(product.getPicture());
+			
+			
+			String SQL = "UPDATE products SET"
 					+ "name=?,"
 					+ "description=?,"
 					+ "price=?,"
 					+ "available=?,"
 					+ "picture=?,"
-					+ "category=?,"
-					+ "WHERE id=?)";
+					+ "category=?"
+					+ "WHERE id=?";
 			
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
@@ -82,9 +95,9 @@ public class ProductDao {
 			st.setFloat(3, product.getPrice());
 			st.setBoolean(4, product.getAvailable());
 			st.setString(5, product.getPicture());
-			st.setInt(5, product.getCategory());
+			st.setInt(6, product.getCategory());
 			st.setInt(7, product.getId());
-			
+				
 			if(st.executeUpdate()>0) {
 				return true;
 			}else {
@@ -96,12 +109,12 @@ public class ProductDao {
 		}
 	}
 	
-	public static boolean destroy(Product product) {
+	public static boolean destroy(int id) {
 		try {
 			String SQL = "DELETE FROM products WHERE id=?;";
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
-			st.setInt(1, product.getId());
+			st.setInt(1, id);
 			
 			if(st.executeUpdate()>0) {
 				return true;

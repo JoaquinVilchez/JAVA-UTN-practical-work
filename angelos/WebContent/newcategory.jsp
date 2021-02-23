@@ -31,7 +31,7 @@
             <div class="card card-primary">
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="categoryController" method="POST">
+                <form action="categoryController?action=store" method="POST">
                   <div class="card-body">
                       <div class="form-group">
                             <div class="row">

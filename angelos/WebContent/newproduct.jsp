@@ -35,7 +35,7 @@
             <div class="card card-primary">
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="productController" method="POST"  enctype="multipart/form-data"> 
+                <form action="productController?action=store" method="POST"  enctype="multipart/form-data"> 
                   <div class="card-body">
                       <div class="form-group">
                               <div class="row">
@@ -73,7 +73,7 @@
                                 <label>Imágen</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="picture">
+                                    <input type="file" class="custom-file-input" name="picture" disabled="disabled">
                                     <label class="custom-file-label">Elegir archivo</label>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
     </section>
     <!-- /.content -->
 
-    
   </div>
   <!-- /.content-wrapper -->
+   
   <%@ include file="footer.jsp" %>

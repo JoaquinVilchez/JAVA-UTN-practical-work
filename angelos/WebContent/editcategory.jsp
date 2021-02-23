@@ -1,4 +1,9 @@
 <%@ include file="header.jsp" %>
+<%@page import="model.Category"%>
+<%@page import="dao.CategoryDao"%>
+
+<% Category category = CategoryDao.find(Integer.parseInt(request.getParameter("id")));%>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -32,19 +37,19 @@
             <div class="card card-primary">
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form action="categoryController?action=update&id=<%= category.getId() %>" method="POST">
                   <div class="card-body">
                       <div class="form-group">
                             <div class="row">
                               <div class="col-4">
                                   <label for="exampleInputEmail1">Nombre</label>
-                                  <input type="name" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la categoría">
+                                  <input type="name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la categoría" value="<%= category.getName()%>">
                               </div>
                           </div>
                       </div>
                     <div class="form-group">
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+                        <input type="checkbox" name="state" class="form-check-input" id="exampleCheck1" <% if(category.getState()){ %> checked <%} %>>
                         <label class="form-check-label" for="exampleCheck1">Esta categoría está disponible</label>
                       </div>
                     </div>

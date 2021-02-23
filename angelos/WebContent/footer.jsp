@@ -62,8 +62,7 @@
 	}
 	
     document.getElementById('button-'+activePage).classList.add("active")
-	
-	
+
 </script>
 </body>
 </html>

@@ -19,7 +19,7 @@
             <h1 class="m-0">Productos</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <a href="newproduct.jsp" type="button" class="btn btn-primary float-right">Nuevo</a>
+            <a href="productController?action=create" type="button" class="btn btn-primary float-right">Nuevo</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -64,8 +64,8 @@
                     <td><%= CategoryDao.find(p.getCategory()).getName() %></td>
                     <td>$<%= p.getPrice() %></td>
                     <td>
-                      <a href="editproduct.jsp"><i class="fas fa-edit"></i></a>
-                      <a href="#"><i class="fas fa-trash"></i></a>
+                      <a href="productController?action=edit&id=<%= p.getId()%>"><i class="fas fa-edit"></i></a>
+                      <a href="productController?action=destroy&id=<%= p.getId()%>"><i class="fas fa-trash"></i></a>
                     </td>
                   </tr>
                   <% } %>
@@ -93,8 +93,6 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-
-    
   </div>
   <!-- /.content-wrapper -->
-  <%@ include file="footer.jsp" %>
+<%@ include file="footer.jsp" %>
