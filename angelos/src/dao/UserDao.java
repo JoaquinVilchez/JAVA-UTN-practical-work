@@ -64,4 +64,29 @@ public class UserDao {
 		}
 	}
 	
+	public static Boolean checkIfEmailExists(String email) {
+		try {
+			String SQL = "SELECT * FROM users WHERE email=?";
+			Connection con = DBConnection.connect();
+			PreparedStatement st = con.prepareStatement(SQL);
+			
+			st.setString(1, email);
+			
+			ResultSet result = st.executeQuery();
+			
+			result.next();
+			String resultEmail = result.getString("email");
+			
+			if(resultEmail!=null) {
+				System.out.println("FUNCTION> El email ya esta registrado: "+resultEmail);
+				return true;
+			}else{		
+				System.out.println("FUNCTION> El email no esta registrado: "+resultEmail);
+				return false;
+			}			
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 }

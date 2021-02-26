@@ -76,33 +76,39 @@ public class userController extends HttpServlet {
 			String status = "active";
 			String type = "customer";
 			
-			if(password.equals(passwordConfirm)) {
-				User user = new User();
-				
-				user.setFirstName(firstName);
-				user.setLastName(lastName);
-				user.setEmail(email);
-				user.setPassword(password);
-				user.setPicture(picture);
-				user.setStatus(status);
-				user.setType(type);
-				
-				if(UserDao.register(user)) {
-					request.setAttribute("success_message", "Usuario creado con éxito. ¡Bienvenido!");
-				}else {
-					request.setAttribute("error_message", "Hubo un error y el usuario no pudo ser creado.");
-				}
+			if(!UserDao.checkIfEmailExists(email)) {
+				if(password.equals(passwordConfirm)) {
+					User user = new User();
+					
+					user.setFirstName(firstName);
+					user.setLastName(lastName);
+					user.setEmail(email);
+					user.setPassword(password);
+					user.setPicture(picture);
+					user.setStatus(status);
+					user.setType(type);
+					
+					if(UserDao.register(user)) {
+						request.setAttribute("success_message", "Usuario creado con éxito. ¡Bienvenido!");
+					}else {
+						request.setAttribute("error_message", "Hubo un error y el usuario no pudo ser creado.");
+					}
 
-				request.getRequestDispatcher("login.jsp").forward(request, response);		
+					request.getRequestDispatcher("login.jsp").forward(request, response);		
+				}else {
+					request.setAttribute("error_message", "Las contraseñas no coinciden");
+					request.getRequestDispatcher("register.jsp").forward(request, response);
+				}
 			}else {
-				request.setAttribute("error_message", "Las contraseñas no coinciden");
+				request.setAttribute("error_message", "Ya existe un usuario con ese email");
 				request.getRequestDispatcher("register.jsp").forward(request, response);
 			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("error_message", "Hubo un error y el usuario no pudo ser creado. Error: "+e);
-			request.getRequestDispatcher("login.jsp").forward(request, response);			
+			request.getRequestDispatcher("register.jsp").forward(request, response);			
 		}
 
 	}
@@ -121,6 +127,7 @@ public class userController extends HttpServlet {
 				session.setAttribute("user_firstName", user.getFirstName());
 				session.setAttribute("user_lastname", user.getLastName());
 				session.setAttribute("user_email", user.getEmail());
+				session.setAttribute("user_type", user.getType());
 				request.getRequestDispatcher("index.jsp").forward(request, response);						
 			}else {
 				request.setAttribute("error_message", "No se pudo iniciar sesión. Usuario o contraseña incorrecto");
