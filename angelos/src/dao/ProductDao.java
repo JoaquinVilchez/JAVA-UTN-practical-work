@@ -14,14 +14,7 @@ public class ProductDao {
 			String SQL = "INSERT INTO products values (null,?,?,?,?,?,?)";
 			Connection con = DBConnection.connect();
 			PreparedStatement st = con.prepareStatement(SQL);
-			
-			System.out.println(product.getName());
-			System.out.println(product.getDescription());
-			System.out.println(product.getPrice());
-			System.out.println(product.getAvailable());
-			System.out.println(product.getPicture());
-			System.out.println(product.getCategory());
-			
+
 			st.setString(1, product.getName());
 			st.setString(2, product.getDescription());
 			st.setFloat(3, product.getPrice());
@@ -67,18 +60,7 @@ public class ProductDao {
 	
 	public static boolean update(Product product) {
 		try {
-			
-			System.out.println("DAO:");
 
-			System.out.println(product.getId());
-			System.out.println(product.getName());
-			System.out.println(product.getCategory());
-			System.out.println(product.getPrice());
-			System.out.println(product.getDescription());
-			System.out.println(product.getAvailable());
-			System.out.println(product.getPicture());
-			
-			
 			String SQL = "UPDATE products SET"
 					+ "name=?,"
 					+ "description=?,"

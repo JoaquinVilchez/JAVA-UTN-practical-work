@@ -13,7 +13,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Juan Perez</a>
+          <a href="#" class="d-block"><%= session.getAttribute("user_firstName") %></a>
         </div>
       </div>
 
@@ -102,6 +102,12 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="userController?action=salir" id="button-information" class="nav-link">
+              <i class="fas fa-power-off"></i>
+              <p>Cerrar sesion</p>
+            </a>
           </li>
         </ul>
       </nav>
