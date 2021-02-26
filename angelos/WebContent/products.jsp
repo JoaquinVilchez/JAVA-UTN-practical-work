@@ -53,7 +53,11 @@
                   <tbody>
                   <% for(Product p:ProductDao.getAll()){ %>
                   <tr>
-                    <td><%= p.getName() %></td>
+                    <td><%= p.getName() %> 
+                    	<%if(p.getAvailable()==false){ %>
+							<span class="badge badge-danger ml-2">No disponible</span>
+						<%} %>
+                    </td>
                     <td>
 	                    <% if(p.getDescription()==""){ %>
 	                    	<span>-</span>

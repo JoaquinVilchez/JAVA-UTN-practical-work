@@ -140,6 +140,7 @@ public class productController extends HttpServlet {
 			product.setDescription(description);
 			product.setAvailable(state);
 
+			System.out.println("CONTROLLER");
 			System.out.println(product.getId());
 			System.out.println(product.getName());
 			System.out.println(product.getCategory());

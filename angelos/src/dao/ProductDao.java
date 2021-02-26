@@ -61,16 +61,19 @@ public class ProductDao {
 	public static boolean update(Product product) {
 		try {
 
-			String SQL = "UPDATE products SET"
-					+ "name=?,"
-					+ "description=?,"
-					+ "price=?,"
-					+ "available=?,"
-					+ "picture=?,"
-					+ "category=?"
-					+ "WHERE id=?";
+			System.out.println("DAO");
+			System.out.println(product.getId());
+			System.out.println(product.getName());
+			System.out.println(product.getCategory());
+			System.out.println(product.getPrice());
+			System.out.println(product.getDescription());
+			System.out.println(product.getAvailable());
+			System.out.println(product.getPicture());
+
 			
-			Connection con = DBConnection.connect();
+			String SQL = "UPDATE products SET name=?, description=?, price=?, available=?, picture=?, category=? WHERE id=?";
+			
+			Connection con = DBConnection.connect();	
 			PreparedStatement st = con.prepareStatement(SQL);
 			st.setString(1, product.getName());
 			st.setString(2, product.getDescription());
